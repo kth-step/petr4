@@ -18,10 +18,10 @@ depends: [
   "bignum"
   "ocaml" {>= "4.09.1"}
   "dune" {>= "1.2"}
-  "cstruct"
+  "cstruct" {<= "6.0.0"}
   "cstruct-sexp"
   "cohttp-lwt-unix"
-  "menhir"
+  "menhir" {<= "20211128"}
   "ANSITerminal"
   "core" {>= "0.13.0"}
   "ppx_deriving_yojson"
