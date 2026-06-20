@@ -161,10 +161,10 @@ let send_packet sockets switch in_port (pkt,port) =
   let out_port = Bigint.to_int_exn port in
   if out_port = ctrl_port then
     let hex = Hex.of_cstruct pkt |> Hex.show in
-    let () = Printf.eprintf "[Generating PacketIn %d %s\n%!]" in_port hex in
+    (* let () = Printf.eprintf "[Generating PacketIn %d %s\n%!]" in_port hex in *)
     Petr4_unix.Runtime_server.post_packet switch in_port hex
   else
-    let () = Printf.eprintf "Sending packet from %d to %d\n%!" in_port out_port in 
+    (* let () = Printf.eprintf "Sending packet from %d to %d\n%!" in_port out_port in *)
     List.Assoc.find sockets out_port ~equal:Int.equal
     |> Option.value_map ~default:(Lwt.return ())
          ~f:(fun sock -> Lwt_rawlink.send_packet sock pkt)
@@ -179,7 +179,7 @@ let do_process_packet switch num_ports sockets env st pkt in_port =
 let do_counter_request switch st name index =
   let open Eval.V1Interpreter in
   let count = read_counter st name index in
-  Printf.eprintf "[Petr4] CounterRequest(%s,%s[%d]) = %d\n%!" switch name index count;
+  (* Printf.eprintf "[Petr4] CounterRequest(%s,%s[%d]) = %d\n%!" switch name index count; *)
   Petr4_unix.Runtime_server.post_counter_response switch name index count
   
 let start_v1switch switch env prog sockets =
